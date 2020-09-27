@@ -12,8 +12,8 @@ class JetbotController:
     def __init__(self):
         robot = Robot()
         self.mobile = MobileController(10, robot)
-        #rospy.Subscriber('/joy', Joy, self.joy_stick_callback)
-        rospy.Subscriber("/jetbot/cmd_vel", Twist, self.cmd_vel_callback)
+        rospy.Subscriber('/joy', Joy, self.joy_stick_callback)
+        rospy.Subscriber("jetbot/cmd_vel", Twist, self.cmd_vel_callback)
 
     def start(self):
         rospy.init_node('jetson_controller')
@@ -37,13 +37,10 @@ class JetbotController:
 
 
     def cmd_vel_callback(self, msg):
-       # if msg.linear.x != 0.0 or msg.angular.z != 0.0:
-       #     rospy.loginfo("Received a /cmd_vel message!")
-       #     rospy.loginfo("Linear Components: [%f, %f, %f]"%(msg.linear.x, msg.linear.y, msg.linear.z))
-       #    rospy.loginfo("Angular Components: [%f, %f, %f]"%(msg.angular.x, msg.angular.y, msg.angular.z))
-        #self.mobile.controll(msg.linear.x, msg.angular.z)
-        #self.mobile.controll2(msg.linear.x, msg.angular.z)
-        self.mobile.controll3(msg.linear.x, msg.angular.z)
+        rospy.loginfo("Received a /cmd_vel message!")
+        rospy.loginfo("Linear Components: [%f, %f, %f]"%(msg.linear.x, msg.linear.y, msg.linear.z))
+        rospy.loginfo("Angular Components: [%f, %f, %f]"%(msg.angular.x, msg.angular.y, msg.angular.z))
+        self.mobile.controll(msg.linear.x, msg.angular.z)
 
     def joy_stick_callback(self, msg):
         slottle = self._input_disc(msg.axes[1])

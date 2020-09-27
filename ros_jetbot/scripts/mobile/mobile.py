@@ -47,5 +47,20 @@ class MobileController:
             self.left_v = speed
         print("right :" + str(self.right_v) + ", left :" + str(self.left_v) )
 
+    def controll2(self, speed, radius):
+
+        if radius != 0.0:
+            self.right_v = radius
+            self.left_v = -radius
+        else:
+            self.right_v = speed
+            self.left_v = speed
+        print("right :" + str(self.right_v) + ", left :" + str(self.left_v) )
+
+    def controll3(self, speed, radius):
+        self.right_v = (speed + radius)*0.5
+        self.left_v = (speed - radius)*0.5
+        print("right :" + str(self.right_v) + ", left :" + str(self.left_v) )
+
     def sigmoid(self, x, gain=1, offset_x=0):
         return ((np.tanh(((x+offset_x)*gain)/2)+1)/2)
